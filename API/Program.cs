@@ -1,5 +1,9 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("Env/config.json");
@@ -10,6 +14,22 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+       var tokenkey= builder.Configuration["TokenKey"] ?? throw new Exception("Cannot get Token Key");
+
+       options.TokenValidationParameters= new TokenValidationParameters
+       {
+           ValidateIssuerSigningKey = true,
+           IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(tokenkey)),
+           ValidateIssuer = false,
+           ValidateAudience = false
+       };
+    });
+
+// Adding Services
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
@@ -27,7 +47,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins(

@@ -26,13 +26,21 @@ namespace API.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("DispalyName")
+                    b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("bytea");
 
                     b.HasKey("Id");
 

@@ -1,5 +1,6 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,7 @@ public class MembersController: ControllerBase
         var members= await _dbContext.Set<AppUser>().ToListAsync();
         return Ok(members);
     }
-    
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMemberById(string id)
     {
