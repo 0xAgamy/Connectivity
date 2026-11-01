@@ -1,0 +1,85 @@
+
+<div class="navbar bg-base-100 shadow-lg px-6">
+  <!-- Left: Logo and App Name -->
+  <div class="navbar-start">
+    <a class="btn btn-ghost text-xl gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+        </svg>
+
+      <span class="font-bold">Connectivity</span>
+    </a>
+  </div>
+
+  <!-- Center: Navigation Links -->
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1 gap-2">
+      <li><a href="#" class="font-medium">Matches</a></li>
+      <li><a href="#" class="font-medium">Lists</a></li>
+      <li><a href="#" class="font-medium">Messages</a></li>
+    </ul>
+  </div>
+
+  <!-- Right: Login Form -->
+  <div class="navbar-end gap-2">
+    <div class="hidden md:flex items-center gap-2">
+      @if(_accountServices.currentUser(); as user){
+      <div class="dropdown dropdown-end">
+    <div tabindex="0" role="button" class="flex items-center text-white text-xl gap-3 cursor-pointer">
+      <img src="/user.png" class="w-8 h-8 rounded-full">
+      <span>{{user.displayName}}</span>
+    </div>
+    <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+      <li><a>Edit Profile</a></li>
+      <li><a (click)="Logout()">Logout</a></li>
+    </ul>
+  </div>
+      }
+      @else {
+        <form #loginForm="ngForm" (ngSubmit)="Login()">
+
+      <input
+      [(ngModel)]="creds.Email"
+        name="email"
+        type="text"
+        placeholder="Email"
+        class="input input-bordered input-sm w-32"
+      />
+
+      <input
+      [(ngModel)]="creds.password"
+      name="password"
+        type="password"
+        placeholder="Password"
+        class="input input-bordered input-sm w-32"
+      />
+
+      <button class="btn btn-primary btn-sm">
+        Login
+      </button>
+    </form>
+
+      }
+    
+
+    <!-- Mobile Menu -->
+    <div class="dropdown dropdown-end lg:hidden">
+      <label tabindex="0" class="btn btn-ghost btn-circle">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </label>
+      <ul
+        tabindex="0"
+        class="menu dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+      >
+        <li><a href="#">Matches</a></li>
+        <li><a href="#">Lists</a></li>
+        <li><a href="#">Messages</a></li>
+        <form #loginForm="ngForm" (ngSubmit)="Login()">
+            <input [(ngModel)]="creds.Email" name="email" type="text" placeholder="Email" class="input input-bordered" />
+            <input [(ngModel)]="creds.password" name="password" type="password" placeholder="Password" class="input input-bordered" />
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </ul>
+    </div>
+  </div>
+</div>
