@@ -2,21 +2,23 @@
 <div class="navbar bg-base-100 shadow-lg px-6">
   <!-- Left: Logo and App Name -->
   <div class="navbar-start">
-    <a class="btn btn-ghost text-xl gap-2">
+    <a  routerLink="/" routerLinkActive="text-primary"
+      [routerLinkActiveOptions]="{exact:true}"
+     class="btn btn-ghost text-xl gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
         </svg>
 
-      <span class="font-bold">Connectivity</span>
+      <h3 > Connectivity </h3>
     </a>
   </div>
 
   <!-- Center: Navigation Links -->
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 gap-2">
-      <li><a href="#" class="font-medium">Matches</a></li>
-      <li><a href="#" class="font-medium">Lists</a></li>
-      <li><a href="#" class="font-medium">Messages</a></li>
+      <li><a routerLink="/members" routerLinkActive="text-primary" class="font-medium">Matches</a></li>
+      <li><a routerLink="/lists"  routerLinkActive="text-primary" class="font-medium">Lists</a></li>
+      <li><a routerLink="/messages" routerLinkActive="text-primary" class="font-medium">Messages</a></li>
     </ul>
   </div>
 
@@ -71,9 +73,9 @@
         tabindex="0"
         class="menu dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
       >
-        <li><a href="#">Matches</a></li>
-        <li><a href="#">Lists</a></li>
-        <li><a href="#">Messages</a></li>
+        <li><a routerLink="/members" routerLinkActive="text-primary">Matches</a></li>
+        <li><a routerLink="/lists"  routerLinkActive="text-primary">Lists</a></li>
+        <li><a routerLink="/messages" routerLinkActive="text-primary">Messages</a></li>
         <form #loginForm="ngForm" (ngSubmit)="Login()">
             <input [(ngModel)]="creds.Email" name="email" type="text" placeholder="Email" class="input input-bordered" />
             <input [(ngModel)]="creds.password" name="password" type="password" placeholder="Password" class="input input-bordered" />
