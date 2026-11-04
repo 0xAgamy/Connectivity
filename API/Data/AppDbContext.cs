@@ -12,6 +12,8 @@ public class AppDbContext: DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<AppUser>().ToTable("Users");
+        modelBuilder.Entity<Member>().ToTable("Memebers");
+        modelBuilder.Entity<Photo>().ToTable("Photos");
 
     }
 }
